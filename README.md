@@ -2,7 +2,7 @@
 
 ## Design Phase
 
-* Go to http://home.spencerholman.com/snake and check out the basic example.
+* Go to [https://saholman.github.io/snakegame/solution/index.html](https://saholman.github.io/snakegame/solution/index.html) and check out the basic example.
 * On a blank piece of paper, design what you want your game to look like.
 	* Pick a background color
 	* Draw the size you want the game board to be.
@@ -21,7 +21,7 @@
 * Download a zip file of this project from Github.
 * Open the file `index.html` in Notepad++ or another text editor. (If you've ever done coding before, use `hard.html` instead.  You can do it!
 
-Now search through the document for the word `FIXME` and see if you can figure out where the answers to the above questions go.  First, start out changing the title.
+Now search through the document for the word `FIXME` and see if you can figure out where the answers to the above questions go.  Start out by changing the title.
 
 If you decided to try `hard.html`, then you'll find the same questions above, but a few more challenges await you.
 
