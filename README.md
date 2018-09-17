@@ -23,7 +23,7 @@
 
 Now search through the document for the word `FIXME` and see if you can figure out where the answers to the above questions go.  Start out by changing the title.
 
-If you decided to try `hard.html`, then you'll find the same questions above, but a few more challenges await you.
+If you decided to try `challenge.html`, then you'll find the same questions above, but a few more challenges await you.
 
 Good luck!
 
