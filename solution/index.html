@@ -10,19 +10,32 @@
   }
 
   body {
-    background: black; /* FIXME: Set Background color here*/
+    background: burlywood;  /* FIXME: Set Background color here*/
     display: flex;
     align-items: center;
     justify-content: center;
     overflow-y: hidden;
   }
   canvas {
-    border: 1px solid white;
+    border: 1px solid green;
   }
   h1, h3 {
-    color: white;
+    color: green;
     display: block;
     text-align: center
+  }
+  .sidebar {
+    background-color: green;
+    width: 160px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+  }
+  #sidebar1 {
+    left: 120px;
+  }
+  #sidebar2 {
+    right: 120px;
   }
   </style>
 </head>
@@ -35,6 +48,8 @@
       </div>
       <!-- Canvas width and height must be multiples of 16 -->
       <canvas width="800" height="560" id="game" style="display:block;"></canvas>
+      <div class="sidebar" id="sidebar1"></div>
+      <div class="sidebar" id="sidebar2"></div>
   </div>
   <script>
   var canvas = document.getElementById('game');
@@ -108,7 +123,7 @@
     context.fillRect(apple.x, apple.y, grid-1, grid-1);
 
     // draw snake
-    context.fillStyle = 'green';
+    context.fillStyle = 'blue';
     snake.cells.forEach(function(cell, index) {
       context.fillRect(cell.x, cell.y, grid-1, grid-1);
 
