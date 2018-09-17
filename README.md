@@ -2,7 +2,7 @@
 
 ## Design Phase
 
-* Go to [https://saholman.github.io/snakegame/solution/index.html](https://saholman.github.io/snakegame/solution/index.html) and check out the basic example.
+* Go to [https://saholman.github.io/snakegame/solution/index.html](https://saholman.github.io/snakegame/solution/index.html) and check out the example.
 * On a blank piece of paper, design what you want your game to look like.
 	* Pick a background color
 	* Draw the size you want the game board to be.
@@ -24,6 +24,8 @@
 Now search through the document for the word `FIXME` and see if you can figure out where the answers to the above questions go.  Start out by changing the title.
 
 If you decided to try `hard.html`, then you'll find the same questions above, but a few more challenges await you.
+
+Good luck!
 
 ## Credits
 This project was based on the game created by straker [here](https://gist.github.com/straker/ff00b4b49669ad3dec890306d348adc4).
