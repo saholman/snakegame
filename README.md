@@ -2,7 +2,7 @@
 
 ## Design Phase
 
-* Go to [https://saholman.github.io/snakegame/solution/index.html](https://saholman.github.io/snakegame/solution/index.html) and check out the example.
+* Go to [https://saholman.github.io/snakegame/spencer.html](https://saholman.github.io/snakegame/spencer.html) and check out the example.
 * On a blank piece of paper, design what you want your game to look like.
 	* Pick a background color
 	* Draw the size you want the game board to be.
