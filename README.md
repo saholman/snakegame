@@ -19,7 +19,7 @@
 
 ## Build Phase
 * Download a zip file of this project from Github.
-* Open the file `easy.html` in Notepad++ or another text editor. (If you've ever done coding before, use `challenge.html` instead.  You can do it!
+* Open the file `easy.html` in Notepad++ or another text editor. (If you've ever done coding before, use `challenge.html` instead.  You can do it!)
 
 Now search through the document for the word `FIXME` and see if you can figure out where the answers to the above questions go.  Start out by changing the title.
 
