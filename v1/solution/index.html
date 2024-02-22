@@ -10,7 +10,7 @@
   }
 
   body {
-    background: black; /* FIXME: Set Background color here*/
+    background: black;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,29 +21,25 @@
   }
   h1, h3 {
     color: white;
-    display: block;
     text-align: center
   }
   </style>
 </head>
 <body>
-
   <div>
-      <div style="display:block;">
-          <h1 style="font-size: 60px;">YOUR TITLE HERE</h1>
-          <h3 style="font-size: 25px;">Score: <span id='score'>0</span></h3>
-      </div>
-      <!-- FIXME: Edit board size.  Canvas width and height must be multiples of 16 (grid size) -->
-      <canvas width="400" height="400" id="game" style="display:block;margin: auto;"></canvas>
+    <h1>Spencer's Game of Snake</h1>
+    <h3>Score: <span id='score'>0</span></h3>
   </div>
+  <!-- Canvas width and height must be multiples of 16 -->
+  <canvas width="400" height="400" id="game" style="display: block;"></canvas>
   <script>
   var canvas = document.getElementById('game');
   var context = canvas.getContext('2d');
   var score = document.getElementById('score')
 
-  var speed = 6; // FIXME: How fast do you want your snake to move? (1-10). 6 recommended.
-  var startingLength = 4; // FIXME: How long do you want your snake to start out as? 4 recommended.
-  var grid = 16; // The size of a single grid cell in pixels
+  var speed = 4; // How fast do you want your snake to move? (1-10). 6 recommended.
+  var startingLength = 4; // How long do you want your snake to start out as? 4 recommended.
+  var grid = 16;
   var width = canvas.width / grid;
   var height = canvas.height / grid;
   var snake = {
@@ -84,8 +80,7 @@
       snake.x = canvas.width - grid;
     }
     else if (snake.x >= canvas.width) {
-      // FIXME: Based on what we did above, what do you think needs to happen here to keep the snake from disappearing off the screen.
-      // If you need help, come ask!  Don't cheat too quickly.
+      snake.x = 0;
     }
 
     // wrap snake position on top and bottom of screen.
@@ -93,7 +88,7 @@
       snake.y = canvas.height - grid;
     }
     else if (snake.y >= canvas.height) {
-      // FIXME: Do the same thing you did above, but for the y axis.
+      snake.y = 0;
     }
 
     // keep track of where snake has been. front of the array is always the head
@@ -105,11 +100,11 @@
     }
 
     // draw apple
-    context.fillStyle = 'red'; // FIXME: Set the color of your apple
+    context.fillStyle = 'red';
     context.fillRect(apple.x, apple.y, grid-1, grid-1);
 
     // draw snake
-    context.fillStyle = 'green'; // FIXME: Set the color of your snake
+    context.fillStyle = 'green';
     snake.cells.forEach(function(cell, index) {
       context.fillRect(cell.x, cell.y, grid-1, grid-1);
 
@@ -118,12 +113,6 @@
         snake.maxCells++;
         score.innerHTML = snake.maxCells - startingLength;
 
-
-        /* FIXME: This is where we change where the apple is after the snake eats it, 
-             but it always starts in the same place when the game starts over.  Can 
-             you figure out how to make it start in a different place, event when 
-             the game restarts?
-        */
         apple.x = getRandomInt(0, 25) * grid;
         apple.y = getRandomInt(0, 25) * grid;
       }
@@ -133,7 +122,7 @@
         
         // collision. reset game
         if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
-          alert('Some boring message.  Oh yea, and your score is ' + score.innerHTML) // FIXME: Set the alert message
+          alert('Good job! Your score: ' + score.innerHTML)
           snake.x = 160;
           snake.y = 160;
           snake.cells = [];
@@ -155,24 +144,22 @@
     var UP = 38;
     var RIGHT = 39;
     var DOWN = 40;
-
-    /*
-        FIXME: I've left the first answer here. Your job is to fill in the 3 other "else if" blocks below.  
-        Use the pattern in the first section to see what you will need to do in the other sections. 
-        If you get stuck you can check the solution, but give it a good effort first!
-    */
+    // prevent snake from backtracking on itself
     if (e.which === LEFT && snake.dx === 0) {
       snake.dx = -grid;
       snake.dy = 0;
     }
     else if (e.which === UP && snake.dy === 0) {
-
+      snake.dy = -grid;
+      snake.dx = 0;
     }
     else if (e.which === RIGHT && snake.dx === 0) {
-
+      snake.dx = grid;
+      snake.dy = 0;
     }
     else if (e.which === DOWN && snake.dy === 0) {
-
+      snake.dy = grid;
+      snake.dx = 0;
     }
   });
 
