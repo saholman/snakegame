@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <style>
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+  body {
+    background: burlywood;  /* FIXME: Set Background color here*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: hidden;
+  }
+  canvas {
+    border: 1px solid green;
+  }
+  h1, h3 {
+    color: green;
+    display: block;
+    text-align: center
+  }
+  .sidebar {
+    background-color: green;
+    width: 100px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+  }
+  #sidebar1 {
+    left: 60px;
+  }
+  #sidebar2 {
+    right: 60px;
+  }
+  </style>
+</head>
+<body>
+
+  <div>
+      <div style="display:block;">
+          <h1 style="font-size: 60px;font-family: Apple Chancery, cursive">Spencer's Game of Snake</h1>
+          <h3 style="font-size: 25px;">Score: <span id='score'>0</span></h3>
+      </div>
+      <!-- Canvas width and height must be multiples of 16 -->
+      <canvas width="800" height="560" id="game" style="display:block;"></canvas>
+      <div class="sidebar" id="sidebar1"></div>
+      <div class="sidebar" id="sidebar2"></div>
+  </div>
+  <script>
+  var canvas = document.getElementById('game');
+  var context = canvas.getContext('2d');
+  var score = document.getElementById('score')
+
+  var speed = 6; // How fast do you want your snake to move? (1-10). 6 recommended.
+  var startingLength = 4; // How long do you want your snake to start out as? 4 recommended.
+  var grid = 16;
+  var width = canvas.width / grid;
+  var height = canvas.height / grid;
+  var snake = {
+    x: 160, // X location of snake head
+    y: 160, // Y location of snake head
+    dx: grid, // New X location of snake head
+    dy: 0, // New Y location of snake head
+    cells: [], // The cells that make up the snake
+    maxCells: startingLength
+  };
+  var count = 0;
+  var apple = {
+    x: getRandomInt(0, 25) * grid,
+    y: getRandomInt(0, 25) * grid
+  };
+
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
+  // game loop
+  function loop() {
+    requestAnimationFrame(loop);
+
+    if (++count < (10 - speed)) {
+      return;
+    }
+
+    count = 0;
+    context.clearRect(0,0,canvas.width,canvas.height);
+
+    // Move snake from old place to new place
+    snake.x += snake.dx;
+    snake.y += snake.dy;
+
+    // wrap snake position on sides of screen
+    if (snake.x < 0) {
+      snake.x = canvas.width - grid;
+    }
+    else if (snake.x >= canvas.width) {
+      snake.x = 0;
+    }
+
+    // wrap snake position on top and bottom of screen.
+    if (snake.y < 0) {
+      snake.y = canvas.height - grid;
+    }
+    else if (snake.y >= canvas.height) {
+      snake.y = 0;
+    }
+
+    // keep track of where snake has been. front of the array is always the head
+    snake.cells.unshift({x: snake.x, y: snake.y});
+
+    // remove cells as we move away from them
+    if (snake.cells.length > snake.maxCells) {
+      snake.cells.pop();
+    }
+
+    // draw apple
+    context.fillStyle = 'red';
+    context.fillRect(apple.x, apple.y, grid-1, grid-1);
+
+    // draw snake
+    context.fillStyle = 'blue';
+    snake.cells.forEach(function(cell, index) {
+      context.fillRect(cell.x, cell.y, grid-1, grid-1);
+
+      // snake ate apple
+      if (cell.x === apple.x && cell.y === apple.y) {
+        snake.maxCells++;
+        score.innerHTML = snake.maxCells - startingLength;
+
+        apple.x = getRandomInt(0, 25) * grid;
+        apple.y = getRandomInt(0, 25) * grid;
+      }
+
+      // check collision with all cells after this one (modified bubble sort)
+      for (var i = index + 1; i < snake.cells.length; i++) {
+        
+        // collision. reset game
+        if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
+          alert('Good job! Your score: ' + score.innerHTML)
+          snake.x = 160;
+          snake.y = 160;
+          snake.cells = [];
+          snake.maxCells = 4;
+          snake.dx = grid;
+          snake.dy = 0;
+
+          score.innerHTML = snake.maxCells - startingLength;
+
+          apple.x = getRandomInt(0, 25) * grid;
+          apple.y = getRandomInt(0, 25) * grid;
+        }
+      }
+    });
+  }
+
+  document.addEventListener('keydown', function(e) {
+    var LEFT = 37;
+    var UP = 38;
+    var RIGHT = 39;
+    var DOWN = 40;
+    // prevent snake from backtracking on itself
+    if (e.which === LEFT && snake.dx === 0) {
+      snake.dx = -grid;
+      snake.dy = 0;
+    }
+    else if (e.which === UP && snake.dy === 0) {
+      snake.dy = -grid;
+      snake.dx = 0;
+    }
+    else if (e.which === RIGHT && snake.dx === 0) {
+      snake.dx = grid;
+      snake.dy = 0;
+    }
+    else if (e.which === DOWN && snake.dy === 0) {
+      snake.dy = grid;
+      snake.dx = 0;
+    }
+  });
+
+
+  // Remove green side columns on narrow screens
+  if(window.innerWidth < 1200) {
+    document.getElementById('sidebar1').style.display = 'none';
+    document.getElementById('sidebar2').style.display = 'none';
+  }
+  requestAnimationFrame(loop);
+  </script>
+</body>
+</html>
